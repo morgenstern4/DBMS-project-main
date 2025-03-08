@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/root.css">
+    <title>Table List</title>
+    <style>
+        /* Custom styles for the insert table list page */
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 300;
+            line-height: 1.6;
+            color: #fff;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            overflow: hidden; /* Hide overflow for animations */
+            position: relative;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            line-height: 1.2;
+            color: #fff;
+            margin: 0 0 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: fadeInDown 1.5s ease-in-out;
+        }
+
+        .links {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Two columns for buttons */
+            gap: 20px; /* Spacing between buttons */
+            max-width: 800px;
+            margin-bottom: 40px;
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+
+        .links a {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+            color: #8a1538; /* Qatar maroon text */
+            text-decoration: none;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            font-weight: bold;
+        }
+
+        .links a:hover {
+            background-color: rgba(255, 255, 255, 1); /* Solid white on hover */
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        footer {
+            margin-top: 40px;
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+
+        footer .logo {
+            height: 50px; /* Adjust logo size */
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+        }
+
+        /* Background Animation */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 10%, transparent 10.01%);
+            background-size: 20px 20px;
+            animation: moveBackground 10s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes moveBackground {
+            from {
+                transform: translateY(0) translateX(0);
+            }
+            to {
+                transform: translateY(-1000px) translateX(-1000px);
+            }
+        }
+
+        /* Fade-In Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Table List</h1>
+    <div class="links">
+        <a href="/insert_data_into_tables/squads">Squads</a>
+        <a href="/insert_data_into_tables/clubs">Clubs</a>
+        <a href="/insert_data_into_tables/positions">Positions</a>
+        <a href="/insert_data_into_tables/all_players_info">All Players Info</a>
+        <a href="/insert_data_into_tables/players_stats">Players Stats</a>
+        <a href="/insert_data_into_tables/keepers_stats">Keepers Stats</a>
+        <a href="/insert_data_into_tables/stadiums">Stadiums</a>
+        <a href="/insert_data_into_tables/matches">Matches</a>
+    </div>
+
+    <div class="footer">
+        <img 
+            src="/images/2022_FIFA_World_Cup.svg" 
+            alt="World Cup Qatar 2022 Wordmark" 
+            width="95"
+        >
+    </div>
+</body>
+</html>

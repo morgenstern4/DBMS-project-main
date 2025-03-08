@@ -1,0 +1,187 @@
+<!-- views/tournament_tree.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tournament Tree</title>
+    <link rel="stylesheet" href="/css/table.css"> <!-- Link to your CSS file -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .tournament-tree {
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* Align columns horizontally */
+            gap: 40px;
+            padding: 20px;
+        }
+
+        .stage {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            width: 22%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .stage h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #00ffcc;
+            text-align: center;
+        }
+
+        .match {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .team {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .team img {
+            width: 30px;
+            height: auto;
+        }
+
+        .score {
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        /* Horizontal connectors */
+        .connector {
+            position: absolute;
+            height: 2px;
+            background: #00ffcc;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .connector::after {
+            content: '';
+            position: absolute;
+            right: -10px;
+            top: -4px;
+            width: 10px;
+            height: 10px;
+            border-right: 2px solid #00ffcc;
+            border-top: 2px solid #00ffcc;
+            transform: rotate(45deg);
+        }
+
+        .connector.round-to-quarter {
+            left: 100%;
+            width: 40px;
+        }
+
+        .connector.quarter-to-semi {
+            left: 100%;
+            width: 40px;
+        }
+
+        .connector.semi-to-final {
+            left: 100%;
+            width: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="tournament-tree">
+        <!-- Round of 16 -->
+        <div class="stage">
+            <h2>Round of 16</h2>
+            <% tournamentTree.roundOf16.forEach(match => { %>
+                <div class="match">
+                    <div class="team">
+                        <img src="/images/flags/<%= match.squad_1_name.toLowerCase().replace(/ /g, '-') %>.png" alt="<%= match.squad_1_name %>">
+                        <span><%= match.squad_1_name %></span>
+                    </div>
+                    <div class="score"><%= match.score_squad_1 %> - <%= match.score_squad_2 %></div>
+                    <div class="team">
+                        <img src="/images/flags/<%= match.squad_2_name.toLowerCase().replace(/ /g, '-') %>.png" alt="<%= match.squad_2_name %>">
+                        <span><%= match.squad_2_name %></span>
+                    </div>
+                </div>
+            <% }) %>
+            <div class="connector round-to-quarter"></div> <!-- Arrow to Quarter-finals -->
+        </div>
+
+        <!-- Quarter-finals -->
+        <div class="stage">
+            <h2>Quarter-finals</h2>
+            <% tournamentTree.quarterFinals.forEach(match => { %>
+                <div class="match">
+                    <div class="team">
+                        <img src="/images/flags/<%= match.squad_1_name.toLowerCase().replace(/ /g, '-') %>.png" alt="<%= match.squad_1_name %>">
+                        <span><%= match.squad_1_name %></span>
+                    </div>
+                    <div class="score"><%= match.score_squad_1 %> - <%= match.score_squad_2 %></div>
+                    <div class="team">
+                        <img src="/images/flags/<%= match.squad_2_name.toLowerCase().replace(/ /g, '-') %>.png" alt="<%= match.squad_2_name %>">
+                        <span><%= match.squad_2_name %></span>
+                    </div>
+                </div>
+            <% }) %>
+            <div class="connector quarter-to-semi"></div> <!-- Arrow to Semi-finals -->
+        </div>
+
+        <!-- Semi-finals -->
+        <div class="stage">
+            <h2>Semi-finals</h2>
+            <% tournamentTree.semiFinals.forEach(match => { %>
+                <div class="match">
+                    <div class="team">
+                        <img src="/images/flags/<%= match.squad_1_name.toLowerCase().replace(/ /g, '-') %>.png" alt="<%= match.squad_1_name %>">
+                        <span><%= match.squad_1_name %></span>
+                    </div>
+                    <div class="score"><%= match.score_squad_1 %> - <%= match.score_squad_2 %></div>
+                    <div class="team">
+                        <img src="/images/flags/<%= match.squad_2_name.toLowerCase().replace(/ /g, '-') %>.png" alt="<%= match.squad_2_name %>">
+                        <span><%= match.squad_2_name %></span>
+                    </div>
+                </div>
+            <% }) %>
+            <div class="connector semi-to-final"></div> <!-- Arrow to Final -->
+        </div>
+
+        <!-- Final -->
+        <div class="stage">
+            <h2>Final</h2>
+            <% if (tournamentTree.final) { %>
+                <div class="match">
+                    <div class="team">
+                        <img src="/images/flags/<%= tournamentTree.final.squad_1_name.toLowerCase().replace(/ /g, '-') %>.png" alt="<%= tournamentTree.final.squad_1_name %>">
+                        <span><%= tournamentTree.final.squad_1_name %></span>
+                    </div>
+                    <div class="score"><%= tournamentTree.final.score_squad_1 %> - <%= tournamentTree.final.score_squad_2 %></div>
+                    <div class="team">
+                        <img src="/images/flags/<%= tournamentTree.final.squad_2_name.toLowerCase().replace(/ /g, '-') %>.png" alt="<%= tournamentTree.final.squad_2_name %>">
+                        <span><%= tournamentTree.final.squad_2_name %></span>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>

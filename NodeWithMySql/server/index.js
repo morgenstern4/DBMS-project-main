@@ -4,6 +4,7 @@ const viewRoutes = require("../routes/view_routes");
 const insertRoutes = require("../routes/insert_routes");
 const deleteRoutes = require("../routes/delete_routes");
 const analyticsRoutes = require("../routes/analytics");
+const updateRoutes = require("../routes/update_routes");
 
 const con = require("./connection");
 
@@ -15,6 +16,7 @@ app.set("views", path.join(__dirname, "../views")); // Correct path to views
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "../public"))); // Correct path to public
+app.use("/update-forms", express.static(path.join(__dirname, "../update-forms")));
 
  app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../html_files/index.html"));
@@ -31,10 +33,16 @@ app.get("/insert_data_into_tables", (req, res) => {
 app.get("/analytics", (req, res) => {
     res.sendFile(path.join(__dirname, "../html_files/analytics.html"));
   });
+
+  app.get("/update_tables", (req, res) => {
+    res.sendFile(path.join(__dirname, "../html_files/update_table_list.html")); // Add this line
+  });
+
 // Use view routes module
 app.use("/", viewRoutes);
 app.use("/", insertRoutes);
 app.use("/",deleteRoutes);
+app.use("/", updateRoutes);
 // app.use("/", analyticsRoutes);
 module.exports = app;
  

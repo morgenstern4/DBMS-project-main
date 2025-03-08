@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Player Stats</title>
+    <link rel="stylesheet" href="/css/root.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        form {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input {
+            padding: 8px;
+            width: 100%;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background: #ffd700;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #e6b800;
+        }
+    </style>
+</head>
+<body>
+    <h1>Update Player Stats</h1>
+    <form action="/tables/update-player-stats" method="POST">
+        <label for="player_stats_id">Player Stats ID:</label>
+        <input type="text" id="player_stats_id" name="player_stats_id" required>
+
+        <label for="goals">New Goals:</label>
+        <input type="number" id="goals" name="goals" required>
+
+        <label for="yellow_cards">New Yellow Cards:</label>
+        <input type="number" id="yellow_cards" name="yellow_cards" required>
+
+        <label for="red_cards">New Red Cards:</label>
+        <input type="number" id="red_cards" name="red_cards" required>
+
+        <button type="submit">Update Player Stats</button>
+    </form>
+</body>
+</html>
